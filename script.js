@@ -43,12 +43,11 @@ function start() {
     let question = STORE.questions[questionNum]
     let questionHtml = `<form class="question-form"><legend class="quizQuestion">${question.question}</legend>`
     for (let i = 0; i < question.choices.length; i++) {
-      questionHtml += `<label>${question.choices[i]}</label>`
-      questionHtml += `<input type="radio" name="question" value="${question.choices[i]}"/>`
+      questionHtml += `<label id="choices-text"><input type ="radio" name="question" id="selection" required value="${question.choices[i]}"</input>${question.choices[i]}</label>`
     }
-    questionHtml += `<input class="button" type="submit"/></form>`
+    questionHtml += `<input class="button" type="submit"/></form>`;
     $(".question").html(questionHtml)
-  }
+}
   
   //When the user submits their answer, this function should handle the outcome. It will tell the user to select an answer if the submit button is clicked and no option was chosen.
   function submitChoice() {
@@ -81,6 +80,8 @@ function start() {
     <ul><li class="userScore">Score: ${STORE.score}/${STORE.questions.length}</li></ul>`;
     $(".counts").html(counts)
   }
+
+  //This function will show the final page of the quiz, after all questions have been answered. The score count and question count final. The user will see a "restart quiz" button.
   function displayResults() {
     $(".results-box").show();
     const results =
